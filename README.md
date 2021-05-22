@@ -2,17 +2,23 @@
 
 ### Routers
 
-/ -> Home
-/join -> Sign up
-/login -> Login
-/search -> Search
+- global
 
-/users/:id -> See User
-/users/edit -> Edit MY profile
-/users/delete -> Delete My profile
-/users/logout -> Logout
+  - / -> Home
+  - /join -> Sign up
+  - /login -> Login
+  - /search -> Search
 
-/videos/:id -> See a Video
-/videos/:id/edit -> Edit a Video
-/videos/:id/delete -> Delete a Video
-/videos/upload -> Upload a Video
+- user related
+
+  - users/:id -> See User
+  - /users/edit -> Edit MY profile
+  - /users/delete -> Delete My profile
+  - /users/logout -> Logout
+
+- video related
+
+  - /videos/:id -> See a Video
+  - /videos/:id/edit -> Edit a Video
+  - /videos/:id/delete -> Delete a Video
+  - /videos/upload -> Upload a Video
