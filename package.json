@@ -7,11 +7,22 @@
     "type": "git",
     "url": "git+https://github.com/sbtiffanykim/metube.git"
   },
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js"
+  },
   "author": "Tiffanykim",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sbtiffanykim/metube/issues"
   },
   "homepage": "https://github.com/sbtiffanykim/metube#readme",
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "nodemon": "^2.0.7"
+  }
 }
