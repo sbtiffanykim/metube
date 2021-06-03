@@ -1,6 +1,5 @@
 import User from "../models/User";
 import fetch from "node-fetch";
-import flat from "flat";
 import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) =>
@@ -190,19 +189,19 @@ export const callbackKakaoLogin = async (req, res) => {
         },
       })
     ).json();
-    userData = await flat(userData);
-    let user = await User.findOne({ email: userData["kakao_account.email"] });
+
+    let user = await User.findOne({ email: userData.kakao_account.email });
     if (!user) {
       // create an account
       user = await User.create({
-        avatarUrl: userData["kakao_account.profile.profile_image_url"],
-        name: userData["kakao_account.profile.nickname"]
-          ? userData["kakao_account.profile.nickname"]
+        avatarUrl: userData.kakao_account.profile.profile_image_url,
+        name: userData.kakao_account.profile.nickname
+          ? userData.kakao_account.profile.nickname
           : "Unknown",
-        username: userData["kakao_account.profile.nickname"]
-          ? userData["kakao_account.profile.nickname"]
+        username: userData.kakao_account.profile.nickname
+          ? userData.kakao_account.profile.nickname
           : "Unknown",
-        email: userData["kakao_account.email"],
+        email: userData.kakao_account.email,
         password: "",
         socialLogin: true,
         location: "Unknown",
