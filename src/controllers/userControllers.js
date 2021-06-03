@@ -124,33 +124,30 @@ export const callbackGithubLogin = async (req, res) => {
       return res.redirect("/login");
     }
     // to check if there is a user with the email provided by github
-    const existingUser = await User.findOne({ email: emailObj.eamil });
-    if (existingUser) {
-      // log the user in
-      req.session.loggedIn = true;
-      req.session.user = user;
-      return res.redirect("/");
-    } else {
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
       // create an account
-      const user = await User.create({
+      user = await User.create({
+        avatarUrl: userData.avatar_url,
         name: userData.name ? userData.name : "Unknown",
         username: userData.login,
         email: emailObj.email,
-        socialLogin: true,
         password: "",
+        socialLogin: true,
         location: userData.location ? userData.location : "Unknown",
       });
-      // log the created user
-      req.session.loggedIn = true;
-      req.session.user = user;
-      return res.redirect("/");
     }
+    // log the created user
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
   } else {
     return res.redirect("/login");
   }
 };
 
+export const logout = (req, res) => res.send("Logout");
+
 export const edit = (req, res) => res.send("Edit User");
 export const remove = (req, res) => res.send("Remove User");
 export const see = (req, res) => res.send("See User");
-export const logout = (req, res) => res.send("Logout");
