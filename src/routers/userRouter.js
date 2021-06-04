@@ -3,8 +3,10 @@ import {
   callbackGithubLogin,
   callbackKakaoLogin,
   callbackNaverLogin,
+  getChangePassword,
   getEdit,
   logout,
+  postChangePassword,
   postEdit,
   see,
   startGithubLogin,
@@ -23,6 +25,11 @@ userRouter.get("/kakao/start", publicOnlyMiddleware, startKakaoLogin);
 userRouter.get("/kakao/callback", callbackKakaoLogin);
 userRouter.get("/naver/start", publicOnlyMiddleware, startNaverLogin);
 userRouter.get("/naver/callback", callbackNaverLogin);
+userRouter
+  .route("/change-password")
+  .all(protectorMiddleware)
+  .get(getChangePassword)
+  .post(postChangePassword);
 userRouter.get("/:id", see);
 
 export default userRouter;

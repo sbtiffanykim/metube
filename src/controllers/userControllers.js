@@ -295,7 +295,7 @@ export const logout = (req, res) => {
 };
 
 export const getEdit = (req, res) => {
-  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+  return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 };
 
 export const postEdit = async (req, res) => {
@@ -318,7 +318,7 @@ export const postEdit = async (req, res) => {
     // find a user who already use the email/username is given above
     const foundUser = await User.findOne({ $or: params });
     if (foundUser && foundUser._id.toString() !== _id) {
-      return res.status(400).render("edit-profile", {
+      return res.status(400).render("users/edit-profile", {
         pageTitle: "Edit Profile",
         errorMessage: "This username/email is already taken",
       });
@@ -338,6 +338,39 @@ export const postEdit = async (req, res) => {
   // update the user info in the session
   req.session.user = updateUser;
   return res.redirect("/users/edit");
+};
+
+export const getChangePassword = (req, res) => {
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { currentPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById({ _id });
+  const check = await bcrypt.compare(currentPassword, user.password);
+  // if the current password does not match
+  if (!check) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "Please check the current password",
+    });
+  }
+  // if the confirmation password does not match to the newPassword
+  if (newPassword !== newPasswordConfirmation) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The password does not match the confirmation",
+    });
+  }
+  user.password = newPassword;
+  await user.save();
+  // send notification
+  return res.redirect("/");
 };
 
 export const see = (req, res) => res.send("See User");
