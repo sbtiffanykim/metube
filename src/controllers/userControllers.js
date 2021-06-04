@@ -295,10 +295,49 @@ export const logout = (req, res) => {
 };
 
 export const getEdit = (req, res) => {
-  return res.render("edit-profile", {pageTitle = "Edit Profile"});
+  return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
 
-export const postEdit = (req, res) => {
-  return res.render("edit-profile");
-}
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id, email: sessionEmail, username: sessionUsername },
+    },
+    body: { name, email, username, location },
+  } = req;
+  // to check if the user wants to change his/her email / username
+  let params = [];
+  if (sessionEmail !== email) {
+    params.push({ email });
+  }
+  if (sessionUsername !== username) {
+    params.push({ username });
+  }
+  // if the user has something to change
+  if (params.length > 0) {
+    // find a user who already use the email/username is given above
+    const foundUser = await User.findOne({ $or: params });
+    if (foundUser && foundUser._id.toString() !== _id) {
+      return res.status(400).render("edit-profile", {
+        pageTitle: "Edit Profile",
+        errorMessage: "This username/email is already taken",
+      });
+    }
+  }
+  // if there is no user, update the current user's info
+  const updateUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  // update the user info in the session
+  req.session.user = updateUser;
+  return res.redirect("/users/edit");
+};
+
 export const see = (req, res) => res.send("See User");
