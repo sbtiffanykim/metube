@@ -182,7 +182,7 @@ export const callbackKakaoLogin = async (req, res) => {
   if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
     const apiUrl = "https://kapi.kakao.com";
-    let userData = await (
+    const userData = await (
       await fetch(`${apiUrl}/v2/user/me`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -211,6 +211,79 @@ export const callbackKakaoLogin = async (req, res) => {
     req.session.loggedIn = true;
     req.session.user = user;
     return res.redirect("/");
+  } else {
+    res.redirect("/login");
+  }
+};
+
+export const startNaverLogin = (req, res) => {
+  const state =
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15);
+  const baseUrl = "https://nid.naver.com/oauth2.0/authorize";
+  const config = {
+    response_type: "code",
+    client_id: process.env.NAVER_CLIENT,
+    redirect_uri: "http://localhost:4000/users/naver/callback",
+    state: state,
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  return res.redirect(finalUrl);
+};
+
+export const callbackNaverLogin = async (req, res) => {
+  const baseUrl = "https://nid.naver.com/oauth2.0/token";
+  const config = {
+    grant_type: "authorization_code",
+    client_id: process.env.NAVER_CLIENT,
+    client_secret: process.env.NAVER_SECRET,
+    code: req.query.code,
+    state: req.query.state,
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  const tokenRequest = await (
+    await fetch(finalUrl, {
+      method: "POST",
+      headers: {
+        "X-Naver-Client-Id": process.env.NAVER_CLIENT,
+        "X-Naver-Client-Secret": process.env.NAVER_SECRET,
+      },
+    })
+  ).json();
+
+  if ("access_token" in tokenRequest) {
+    const { access_token } = tokenRequest;
+    const apiUrl = "https://openapi.naver.com";
+    const userData = await (
+      await fetch(`${apiUrl}/v1/nid/me`, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "text/json;charset=utf-8",
+        },
+      })
+    ).json();
+
+    let user = await User.findOne({ email: userData.response.email });
+    if (!user) {
+      // create an account
+      user = await User.create({
+        avatarUrl: userData.response.profile_image,
+        name: userData.response.name ? userData.response.name : "Unknown",
+        username: userData.response.nickname
+          ? userData.response.nickname
+          : "Unknown",
+        email: userData.response.email,
+        password: "",
+        socialLogin: true,
+        location: "Unknown",
+      });
+    }
+    // log the user in
+    req.session.loggedIn = true;
+    req.session.user = user;
+    res.redirect("/");
   } else {
     res.redirect("/login");
   }
