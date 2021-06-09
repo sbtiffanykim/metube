@@ -129,7 +129,7 @@ export const callbackGithubLogin = async (req, res) => {
       // create an account
       user = await User.create({
         avatarUrl: userData.avatar_url,
-        name: userData.name ? userData.name : "Unknown",
+        name: userData.name ? userData.name : userData.login,
         username: userData.login,
         email: emailObj.email,
         password: "",
