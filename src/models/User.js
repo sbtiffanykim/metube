@@ -13,7 +13,10 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 7);
+  // hash the password only if a user's password is modified
+  if (this.isModified(this.password)) {
+    this.password = await bcrypt.hash(this.password, 7);
+  }
 });
 
 const User = mongoose.model("User", userSchema);
