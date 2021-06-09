@@ -110,7 +110,6 @@ export const callbackGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(userData);
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -306,7 +305,6 @@ export const postEdit = async (req, res) => {
     body: { name, email, username, location },
     file,
   } = req;
-  console.log(file);
   // to check if the user wants to change his/her email / username
   let params = [];
   if (sessionEmail !== email) {
