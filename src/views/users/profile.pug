@@ -2,6 +2,6 @@ extends ../base
 include ../mixins/video
 
 block content
-    each item in videos 
+    each item in user.videos 
         +video(item)
         hr
