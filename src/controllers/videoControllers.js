@@ -20,16 +20,35 @@ export const watch = async (req, res) => {
 
 export const getEdit = async (req, res) => {
   const { id } = req.params;
+  const {
+    user: { _id },
+  } = req.session;
   const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not Found" });
+  }
+  // if the logged in user is not the one who post the video
+  // cannot edit the video
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
+  }
   res.render("edit", { pageTitle: `Editing: ${video.title}`, video });
 };
 
 export const postEdit = async (req, res) => {
   const { id } = req.params;
+  const {
+    user: { _id },
+  } = req.session;
   const { title, description, hashtags } = req.body;
   const video = await Video.exists({ _id: id });
   if (!video) {
     return res.status(400).render("404", { pageTitle: "Video not Found" });
+  }
+  // if the logged in user is not the one who post the video
+  // cannot edit the video
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
     title,
@@ -74,6 +93,18 @@ export const postUpload = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const { id } = req.params;
+  const {
+    user: { _id },
+  } = req.session;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.status(400).render("404", { pageTitle: "Video not Found" });
+  }
+  // if the logged in user is not the one who post the video
+  // cannot delete the video
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
+  }
   await Video.findByIdAndDelete(id);
   return res.redirect("/");
 };
