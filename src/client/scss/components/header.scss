@@ -1,0 +1,29 @@
+header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .header__logo {
+    color: $red;
+    font-size: 36px;
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    li {
+      margin-left: 13px;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .header__btn {
+      background-color: white;
+      color: $black;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  }
+}
