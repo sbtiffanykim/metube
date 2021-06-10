@@ -8,7 +8,8 @@
     "url": "git+https://github.com/sbtiffanykim/metube.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/init.js"
+    "dev": "nodemon --exec babel-node src/init.js",
+    "assets": "webpack --config webpack.config.js"
   },
   "author": "Tiffanykim",
   "license": "MIT",
@@ -32,6 +33,9 @@
     "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
-    "nodemon": "^2.0.7"
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
   }
 }
