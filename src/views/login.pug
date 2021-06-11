@@ -8,12 +8,7 @@ block content
         input(type="text", name="username", placeholder="Username", required)
         input(type="password", name="password", placeholder="Password", required)
         input(type="submit", value="Login")
-        br
-        a(href="/users/github/start") Continue with Github &rarr;
-        br
-        a(href="/users/kakao/start") Continue with Kakao &rarr;
-        br
-        a(href="/users/naver/start") Continue with Naver &rarr;
+        include partials/social-login
 
     div.auth-switch
         span Don't have an account? 

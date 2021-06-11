@@ -287,6 +287,44 @@ input[type=submit]:hover {
   background-color: #2980b9;
 }
 
+.social-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.social-login span {
+  margin: 10px 0px;
+}
+
+.social__btn {
+  margin: 8px 0px;
+  font-weight: 600;
+  padding: 13px 35px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+.social__btn:hover {
+  opacity: 0.9;
+}
+.social__btn i,
+.social__btn span {
+  margin-right: 8px;
+}
+
+.social__btn--github {
+  background-color: aliceblue;
+  color: #191919;
+}
+
+.social__btn--kakao {
+  background-color: #f1c40f;
+}
+
+.social__btn--naver {
+  background-color: #2ecc71;
+}
+
 .search__form {
   display: flex;
   justify-content: center;
