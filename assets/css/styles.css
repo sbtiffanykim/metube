@@ -160,6 +160,11 @@ header ul .header__btn {
   padding: 5px 10px;
   border-radius: 5px;
 }
+header .header__avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
 
 footer {
   text-align: center;
