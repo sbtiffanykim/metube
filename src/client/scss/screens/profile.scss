@@ -1,0 +1,22 @@
+.profile__data {
+  max-width: 40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+  img {
+    margin-bottom: 10px;
+  }
+  h3 {
+    font-size: 19px;
+  }
+}
+
+.avatar {
+  display: block;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}

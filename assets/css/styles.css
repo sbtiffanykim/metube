@@ -241,12 +241,6 @@ footer {
   color: #2980b9;
 }
 
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
 form {
   width: 45%;
   margin: 0 auto;
@@ -383,8 +377,25 @@ input[type=submit]:hover {
   color: #2980b9;
 }
 
-.profile__img {
+.profile__data {
+  max-width: 40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.profile__data img {
+  margin-bottom: 10px;
+}
+.profile__data h3 {
+  font-size: 19px;
+}
+
+.avatar {
   display: block;
+  width: 130px;
+  height: 130px;
   margin: 0 auto;
   margin-bottom: 20px;
 }

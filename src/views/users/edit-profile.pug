@@ -1,7 +1,6 @@
 extends ../base
 
 block content 
-    img(src="/" + loggedInUser.avatarUrl, width="100px", height="100px").avatar.profile__img
     form(method="post", enctype="multipart/form-data").edit-profile__form
         label(for="avatar") Avatar 
         input(type="file", id="avatar", name="avatar", accept=".png, .jpg, .jepg")
