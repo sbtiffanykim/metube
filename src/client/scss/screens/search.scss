@@ -8,12 +8,12 @@
     height: 30px;
     padding: 10px 15px;
     width: 80%;
-    border: 1px solid #95a5a6;
+    border: 1px solid $border;
     border-radius: 4px;
     margin: 30px 0px 70px 0px;
     transition: width 0.2s, height 0.3s;
-    &:hover {
-      border: 1px solid #3498db;
+    &:focus {
+      border: 1px solid $blue;
       width: 81%;
       height: 31px;
     }
@@ -22,7 +22,7 @@
     all: unset;
     cursor: pointer;
     position: absolute;
-    right: 60px;
+    right: 56px;
     top: 45px;
     font-size: 20px;
     transition: font-size 0.4s;

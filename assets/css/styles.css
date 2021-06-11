@@ -225,7 +225,66 @@ footer {
 .video-grid {
   display: grid;
   gap: 40px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 50px;
+}
+.auth-switch a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #3498db;
+}
+.auth-switch a:hover {
+  color: #2980b9;
+}
+
+form {
+  width: 45%;
+  margin: 0 auto;
+}
+form:not(.search__form) {
+  border: 1px solid rgba(52, 73, 94, 0.3);
+  border-radius: 5px;
+  padding: 35px;
+}
+
+input {
+  all: unset;
+  padding: 10px 20px;
+  border: 1px solid rgba(52, 73, 94, 0.3);
+  border-radius: 4px;
+  margin-bottom: 15px;
+  width: 90%;
+  transition: border 0.1s;
+}
+input:focus {
+  border: 2px #3498db solid;
+}
+input::placeholder {
+  color: #95a5a6;
+}
+
+input[type=submit] {
+  background-color: #3498db;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 3px;
+  width: 60%;
+  align-items: center;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+input[type=submit]:hover {
+  background-color: #2980b9;
 }
 
 .search__form {
@@ -239,12 +298,12 @@ footer {
   height: 30px;
   padding: 10px 15px;
   width: 80%;
-  border: 1px solid #95a5a6;
+  border: 1px solid rgba(52, 73, 94, 0.3);
   border-radius: 4px;
   margin: 30px 0px 70px 0px;
   transition: width 0.2s, height 0.3s;
 }
-.search__form input:hover {
+.search__form input:focus {
   border: 1px solid #3498db;
   width: 81%;
   height: 31px;
@@ -253,7 +312,7 @@ footer {
   all: unset;
   cursor: pointer;
   position: absolute;
-  right: 60px;
+  right: 56px;
   top: 45px;
   font-size: 20px;
   transition: font-size 0.4s;

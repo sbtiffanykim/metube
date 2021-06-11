@@ -1,0 +1,45 @@
+form {
+  width: 45%;
+  margin: 0 auto;
+  &:not(.search__form) {
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: 35px;
+  }
+}
+
+input {
+  all: unset;
+  padding: 10px 20px;
+  border: 1px solid $border;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  width: 90%;
+  transition: border 0.1s;
+  &:focus {
+    border: 2px $blue solid;
+  }
+  &::placeholder {
+    color: rgba(149, 165, 166, 1);
+  }
+}
+
+input[type="submit"] {
+  background-color: $blue;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 3px;
+  width: 60%;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #2980b9;
+  }
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
