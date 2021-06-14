@@ -256,7 +256,7 @@ form:not(.search__form) {
   padding: 35px;
 }
 
-input {
+input:not(input[type=range]) {
   all: unset;
   padding: 10px 20px;
   border: 1px solid rgba(52, 73, 94, 0.3);
@@ -265,10 +265,10 @@ input {
   width: 90%;
   transition: border 0.1s;
 }
-input:focus {
+input:not(input[type=range]):focus {
   border: 2px #3498db solid;
 }
-input::placeholder {
+input:not(input[type=range])::placeholder {
   color: #95a5a6;
 }
 
