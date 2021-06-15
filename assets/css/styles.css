@@ -339,6 +339,8 @@ input[type=submit]:hover {
 }
 
 .videoController {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
   color: white;
   font-size: 13px;
   width: 95%;
@@ -354,6 +356,9 @@ input[type=submit]:hover {
   grid-auto-flow: column;
   grid-template-columns: 1fr 4fr 1fr auto;
   gap: 10px;
+}
+.videoController.showing {
+  opacity: 1;
 }
 .videoController .videoController__play {
   display: flex;

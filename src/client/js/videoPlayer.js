@@ -53,7 +53,7 @@ const handleVolumeChange = (event) => {
   video.volume = value;
 };
 
-const handleLodedMetadata = () => {
+const handleLodedData = () => {
   totalTime.innerText = formatTime(Math.floor(video.duration));
   timeline.max = Math.floor(video.duration);
 };
@@ -114,23 +114,46 @@ const handleVideoClick = () => {
 
 const handleKeyDown = (event) => {
   const { keyCode } = event;
+  // space
   if (keyCode === 32) {
     event.preventDefault();
     handlePlay();
   }
   // up arrow
-  if (keyCode === 38) {
+  else if (keyCode === 38) {
+    event.preventDefault();
+    volumeValue = Math.min(1, volumeValue + 0.1);
+    volumeRange.value = volumeValue;
+    video.volume = volumeValue;
+    muteBtnIcon.classList =
+      video.volume === 0 ? "fas fa-volume-mute" : "fas fa-volume-up";
   }
   // down arrow
-  // forward
-  // backward
+  else if (keyCode === 40) {
+    event.preventDefault();
+    volumeValue = Math.max(0, volumeValue - 0.1);
+    volumeRange.value = volumeValue;
+    video.volume = volumeValue;
+    muteBtnIcon.classList =
+      video.volume === 0 ? "fas fa-volume-mute" : "fas fa-volume-up";
+  }
+  // left arrow
+  else if (keyCode === 37) {
+    event.preventDefault();
+    video.currentTime -= 1;
+  }
+  // right arrow
+  else if (keyCode === 39) {
+    event.preventDefault();
+    video.currentTime += 1;
+  }
 };
 
 document.addEventListener("keydown", handleKeyDown);
 playBtn.addEventListener("click", handlePlay);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
-video.addEventListener("loadeddata", handleLodedMetadata);
+video.addEventListener("loadeddata", handleLodedData);
 video.addEventListener("timeupdate", handleTimeUpdate);
 video.addEventListener("mouseover", handleMouseover);
 video.addEventListener("mouseleave", handleMouseleave);
