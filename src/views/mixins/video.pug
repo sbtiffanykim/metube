@@ -3,7 +3,7 @@ mixin video(video)
         div.video-mixin__thumbnail
         div.video-mixin__content
             div.video-mixin__avatar
-                img(src=`${video.owner.avatarUrl}`)
+                img(src="/" + `${video.owner.avatarUrl}`)
             div.video-mixin__data
                 div.video-mixin__data-detail
                     span.video-mixin__data-title=video.title
