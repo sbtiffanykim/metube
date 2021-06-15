@@ -330,6 +330,52 @@ input[type=submit]:hover {
   background-color: #2ecc71;
 }
 
+#videoContainer {
+  width: 100%;
+  position: relative;
+}
+#videoContainer video {
+  width: 100%;
+}
+
+.videoController {
+  color: white;
+  font-size: 13px;
+  width: 95%;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #0f1117;
+  border-radius: 5px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 4fr 1fr auto;
+  gap: 10px;
+}
+.videoController .videoController__play {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.videoController .videoController__play .videoController__time {
+  font-size: 14px;
+}
+.videoController .videoController__volume {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+.videoController .videoController__volume i {
+  margin-left: 10px;
+}
+.videoController .videoController__fullScreen {
+  align-self: center;
+  margin-right: 10px;
+}
+
 .search__form {
   display: flex;
   justify-content: center;
