@@ -8,7 +8,7 @@ form {
   }
 }
 
-input:not(input[type="range"]) {
+input:not(input[type="range"], input[type="submit"]) {
   all: unset;
   padding: 10px 20px;
   border: 1px solid $border;

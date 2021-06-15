@@ -256,7 +256,7 @@ form:not(.search__form) {
   padding: 35px;
 }
 
-input:not(input[type=range]) {
+input:not(input[type=range], input[type=submit]) {
   all: unset;
   padding: 10px 20px;
   border: 1px solid rgba(52, 73, 94, 0.3);
@@ -265,10 +265,10 @@ input:not(input[type=range]) {
   width: 90%;
   transition: border 0.1s;
 }
-input:not(input[type=range]):focus {
+input:not(input[type=range], input[type=submit]):focus {
   border: 2px #3498db solid;
 }
-input:not(input[type=range])::placeholder {
+input:not(input[type=range], input[type=submit])::placeholder {
   color: #95a5a6;
 }
 
@@ -468,7 +468,8 @@ body {
 
 main {
   margin: 0 auto;
-  margin: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   max-width: 1200px;
   width: 100%;
 }
